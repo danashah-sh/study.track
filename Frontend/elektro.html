@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8"> <!-- Setter tegnsettet til UTF-8, slik at norske bokstaver vises riktig -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Sørger for at siden skalerer riktig på mobil -->
+  <title>StudyTrack | Elektro og datateknologi</title> <!-- Nettleserfane-tittel -->
+  <link rel="stylesheet" href="style.css"> <!-- Kobler til hoved-CSS -->
+  <link rel="stylesheet" href="elektro.css"> <!-- Kobler til spesifikk CSS for elektro-siden -->
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"> <!-- Laster Google-fonten Poppins -->
+</head>
+
+<body>
+  <header>
+    <h1>Elektro og datateknologi</h1> <!-- Hovedoverskrift -->
+    <p>Hold styr på prosjekter, koblinger og fag</p> <!-- Beskrivelse under overskrift -->
+  </header>
+
+  <main class="content">
+    <!-- Kalender-seksjon -->
+    <section class="calendar">
+      <h2>⚡ Kalender</h2> <!-- Seksjonstittel -->
+      <input type="date" id="calendar-date"> <!-- Dato-velger -->
+      <p id="selected-date">Velg en dato for å se eller legge til planer</p> <!-- Viser valgt dato -->
+    </section>
+
+    <!-- Gjøremål-seksjon -->
+    <section class="todo">
+      <h2>🔧 Gjøremål</h2> <!-- Seksjonstittel -->
+      <div class="todo-input">
+        <input type="text" id="taskInput" placeholder="Skriv et gjøremål..."> <!-- Input-felt for oppgave -->
+        <button id="addTaskBtn">Legg til</button> <!-- Knapp for å legge til oppgave -->
+      </div>
+      <ul id="taskList"></ul> <!-- Liste over oppgaver -->
+    </section>
+
+    <!-- Fag-seksjon -->
+    <section class="subjects">
+      <h2>Fag</h2>
+      <div class="grid">
+        <a href="#" class="card yellow"><h3>Elenergisystemer</h3></a> <!-- Klikkbart kort for fag -->
+        <a href="#" class="card blue"><h3>Automatisering</h3></a>
+        <a href="#" class="card silver"><h3>Elektroniske kretser</h3></a>
+        <a href="#" class="card orange"><h3>Data- og nettverksteknologi</h3></a>
+        <a href="#" class="card teal"><h3>Prosjekt og dokumentasjon</h3></a>
+      </div>
+    </section>
+
+    <!-- Tilbake-knapp -->
+    <a href="index.html" class="back-btn">⬅ Tilbake til forsiden</a>
+  </main>
+
+  <footer>
+    <p>© 2025 StudyTrack | Laget av Dana Shahein</p> <!-- Footer-tekst -->
+  </footer>
+
+  <script>
+    // === Kalender-funksjonalitet ===
+    const calendarInput = document.getElementById("calendar-date"); // Henter input-feltet
+    const selectedDateText = document.getElementById("selected-date"); // Henter paragrafen som viser valgt dato
+
+    calendarInput.addEventListener("change", () => {
+      const date = new Date(calendarInput.value); // Lager et dato-objekt fra valgt verdi
+      selectedDateText.textContent = `Valgt dato: ${date.toLocaleDateString("no-NO")}`; // Viser dato på norsk format
+    });
+
+    // === Gjøremål med localStorage ===
+    const addTaskBtn = document.getElementById("addTaskBtn"); // Henter knappen for å legge til oppgave
+    const taskInput = document.getElementById("taskInput"); // Henter input-feltet
+    const taskList = document.getElementById("taskList"); // Henter listen der oppgaver vises
+
+    // Funksjon for å laste oppgaver fra localStorage
+    const loadTasks = () => {
+      const tasks = JSON.parse(localStorage.getItem("elektroTasks")) || []; // Leser lagrede oppgaver eller tom liste
+      taskList.innerHTML = ""; // Tømmer listen
+      tasks.forEach(task => addTaskToDOM(task.text, task.completed)); // Legger til hver oppgave i DOM
+    };
+
+    // Funksjon for å lagre oppgaver i localStorage
+    const saveTasks = () => {
+      const tasks = [...taskList.children].map(li => ({
+        text: li.querySelector("span").textContent, // Henter teksten i oppgaven
+        completed: li.classList.contains("completed"), // Sjekker om oppgaven er markert som fullført
+      }));
+      localStorage.setItem("elektroTasks", JSON.stringify(tasks)); // Lagre som JSON
+    };
+
+    // Funksjon for å legge til oppgave i DOM
+    const addTaskToDOM = (text, completed = false) => {
+      const li = document.createElement("li"); // Lager listeelement
+      const span = document.createElement("span"); // Lager span for oppgavetekst
+      span.textContent = text; // Setter teksten
+
+      if (completed) li.classList.add("completed"); // Marker som fullført hvis true
+
+      const delBtn = document.createElement("button"); // Lag sletteknapp
+      delBtn.textContent = "✖";
+      delBtn.className = "delete-btn";
+      delBtn.addEventListener("click", () => {
+        li.remove(); // Fjerner oppgaven fra DOM
+        saveTasks(); // Oppdaterer localStorage
+      });
+
+      span.addEventListener("click", () => {
+        li.classList.toggle("completed"); // Marker/avmarker som fullført
+        saveTasks(); // Oppdaterer localStorage
+      });
+
+      li.append(span, delBtn); // Legg til tekst og sletteknapp i listeelement
+      taskList.appendChild(li); // Legg listeelementet til oppgavelisten
+    };
+
+    // Legg til ny oppgave når knapp trykkes
+    addTaskBtn.addEventListener("click", () => {
+      const text = taskInput.value.trim(); // Henter tekst og fjerner mellomrom
+      if (text === "") return; // Ikke legg til tom oppgave
+      addTaskToDOM(text); // Legg til i DOM
+      saveTasks(); // Lagre i localStorage
+      taskInput.value = ""; // Tøm input-feltet
+    });
+
+    loadTasks(); // Last inn eksisterende oppgaver når siden åpnes
+  </script>
+</body>
+</html>

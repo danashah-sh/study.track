@@ -1,0 +1,193 @@
+/* === KUNST, DESIGN OG ARKITEKTUR – EGET TEMA === */
+:root {
+  --pink: #d8c2d0;
+  --purple: #e8e6d9;
+  --blue: #eecec1;
+  --orange: #e3cfb1;
+  --light-bg: #f2d2dc;
+  --text-dark: #333;
+}
+
+/* === GLOBALT === */
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  background: linear-gradient(120deg, #fff9fb, #f3e5f5, #e3f2fd);
+  color: var(--text-dark);
+  transition: 0.3s ease;
+  min-height: 100vh;
+}
+
+/* === HEADER === */
+header {
+  text-align: center;
+  padding: 3rem 1rem 2rem;
+  background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue));
+  color: white;
+  border-bottom: 4px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* === KALENDER === */
+.calendar {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.calendar input {
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  border: 2px solid var(--purple);
+  font-size: 1rem;
+}
+
+/* === GJØREMÅL === */
+.todo {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.todo-input {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1 rem;
+}
+
+.todo-input input {
+  padding: 0.7rem;
+  border-radius: 10px;
+  border: 2px solid var(--pink);
+  width: 230px;
+}
+
+.todo-input button {
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.7rem 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.todo-input button:hover {
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  transform: translateY(-2px);
+}
+
+#taskList {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+#taskList li {
+  background: #fff3f8;
+  border-left: 5px solid var(--pink);
+  color: var(--text-dark);
+  margin: 0.5rem auto;
+  max-width: 350px;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+#taskList li:hover {
+  transform: scale(1.02);
+  background: #ffe6f1;
+}
+
+#taskList li.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #e57373;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* === FAG === */
+.subjects {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.subject-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.subject-grid a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 15px;
+  padding: 1.2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Farger for hvert fagkort */
+.subject-grid a:nth-child(1) { background: linear-gradient(135deg, var(--pink), #f06292); }
+.subject-grid a:nth-child(2) { background: linear-gradient(135deg, var(--purple), #9575cd); }
+.subject-grid a:nth-child(3) { background: linear-gradient(135deg, var(--blue), #4fc3f7); }
+.subject-grid a:nth-child(4) { background: linear-gradient(135deg, var(--orange), #ff8a65); }
+
+.subject-grid a:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* === TILBAKEKNAPP (nå i midten) === */
+.back-btn {
+  display: block;
+  text-align: center;
+  margin: 3rem auto; /* midt på siden */
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  color: white;
+  padding: 0.8rem 1.6rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  width: fit-content;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+}
+
+
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue));
+  color: white;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-top: 3rem;
+}

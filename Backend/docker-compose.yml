@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15-alpine     # Bruker en liten Postgres-database
+    environment:
+      POSTGRES_USER: postgres     # Brukernavn
+      POSTGRES_PASSWORD: mysecretpassword  # Passord
+      POSTGRES_DB: postgres       # Database-navn
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Lagre data permanent
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]  # Sjekk om databasen er klar
+      interval: 5s
+      retries: 5
+
+  backend:
+    build: .  # Bygger backend fra Dockerfile i samme mappe
+    ports:
+      - "3000:3000"  # Åpner port 3000
+    depends_on:
+      db:
+        condition: service_healthy  # Starter først når databasen er klar
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: mysecretpassword
+      DB_HOST: db
+      DB_NAME: postgres
+      DB_PORT: 5432
+      JWT_SECRET: superhemmelig_jwt_nøkkel
+
+volumes:
+  postgres_data:  # Lager et volum for å lagre database-data

@@ -1,0 +1,18 @@
+# Bruk Node 18 Alpine (en liten Node-versjon)
+FROM node:18-alpine
+
+# Lag en mappe inni containeren og gå dit
+WORKDIR /app
+
+# Kopier package.json og package-lock.json først
+# Dette gjør at vi bare installerer på nytt hvis disse filene endres
+COPY package*.json ./
+
+# Installer alle Node-avhengigheter
+RUN npm install
+
+# Kopier resten av koden inn i containeren
+COPY . .
+
+# Fortell Docker hvordan vi starter appen
+CMD ["node", "server.js"]

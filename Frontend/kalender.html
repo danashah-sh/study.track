@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" /> <!-- Sørger for at norske bokstaver vises riktig -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Passer siden til mobil og PC -->
+  <title>StudyTrack | Kalender</title> <!-- Tittel i nettleserfanen -->
+  <link rel="stylesheet" href="kalender.css" /> <!-- CSS for kalenderen -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"> <!-- Font -->
+</head>
+<body>
+
+  <!-- HEADER / topp -->
+  <header>
+    <h1>Din skolekalender</h1> <!-- Tittel -->
+    <p>Hold oversikt over prøver, innleveringer og ferier</p> <!-- Kort forklaring -->
+    <nav>
+      <a href="index.html" class="nav-btn">Hjem</a> <!-- Til forsiden -->
+      <a href="liste.html" class="nav-btn">Todo-liste</a> <!-- Til gjøremålsliste -->
+    </nav>
+  </header>
+
+  <!-- Hovedinnhold: Kalender + Hendelser -->
+  <main class="calendar-container">
+    <!-- Kalender-seksjon -->
+    <section class="calendar">
+      <div class="month">
+        <button class="nav prev">◀</button> <!-- Gå til forrige måned -->
+        <h2 id="month-year">November 2025</h2> <!-- Viser måned og år -->
+        <button class="nav next">▶</button> <!-- Gå til neste måned -->
+      </div>
+
+      <div class="weekdays">
+        <div>Man</div>
+        <div>Tir</div>
+        <div>Ons</div>
+        <div>Tor</div>
+        <div>Fre</div>
+        <div>Lør</div>
+        <div>Søn</div>
+      </div>
+
+      <div class="days" id="days"></div> <!-- Her vises dagene i måneden -->
+    </section>
+
+    <!-- Hendelser / events -->
+    <aside class="events">
+      <h3>🗓️ Hendelser</h3>
+      <ul id="event-list">
+        <li><strong>4. nov:</strong> Matteprøve</li>
+        <li><strong>8. nov:</strong> Innlevering i IT</li>
+        <li><strong>15. nov:</strong> Foreldremøte</li>
+        <li><strong>22. nov:</strong> Norsk fremføring</li>
+      </ul>
+    </aside>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 StudyTrack | Laget av Dana Shahein</p>
+  </footer>
+
+  <!-- === JAVASCRIPT FOR KALENDER === -->
+  <script>
+    // Hent elementer
+    const daysContainer = document.getElementById("days"); // Hvor dagene vises
+    const monthYear = document.getElementById("month-year"); // Viser måned og år
+
+    // Navn på måneder
+    const months = [
+      "Januar", "Februar", "Mars", "April", "Mai", "Juni",
+      "Juli", "August", "September", "Oktober", "November", "Desember"
+    ];
+
+    let date = new Date(); // Dagens dato
+    let currentMonth = date.getMonth(); // Nåværende måned (0-11)
+    let currentYear = date.getFullYear(); // Nåværende år
+
+    // Funksjon for å vise kalender
+    function renderCalendar(month, year) {
+      daysContainer.innerHTML = ""; // Tøm tidligere dager
+      monthYear.textContent = `${months[month]} ${year}`; // Oppdater overskrift
+
+      const firstDay = new Date(year, month, 1).getDay() || 7; // Ukedag for 1. i måneden (Mandag=1)
+      const lastDate = new Date(year, month + 1, 0).getDate(); // Siste dato i måneden
+
+      // Legg til tomme bokser før første dag
+      for (let i = 1; i < firstDay; i++) {
+        const empty = document.createElement("div");
+        empty.classList.add("empty");
+        daysContainer.appendChild(empty);
+      }
+
+      // Legg til alle dager
+      for (let i = 1; i <= lastDate; i++) {
+        const day = document.createElement("div");
+        day.textContent = i;
+        day.classList.add("day");
+
+        // Marker dagens dato
+        if (
+          i === date.getDate() &&
+          month === date.getMonth() &&
+          year === date.getFullYear()
+        ) {
+          day.classList.add("today");
+        }
+
+        daysContainer.appendChild(day);
+      }
+    }
+
+    // Knapp for forrige måned
+    document.querySelector(".prev").addEventListener("click", () => {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      renderCalendar(currentMonth, currentYear);
+    });
+
+    // Knapp for neste måned
+    document.querySelector(".next").addEventListener("click", () => {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      renderCalendar(currentMonth, currentYear);
+    });
+
+    // Vis kalenderen først når siden lastes
+    renderCalendar(currentMonth, currentYear);
+  </script>
+</body>
+</html>

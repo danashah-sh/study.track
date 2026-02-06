@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyTrack | To-do-liste</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="liste.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <header>
+    <h1>To-do-liste</h1>
+    <p>Hold styr på alt du skal gjøre — skole, fritid og mål!</p>
+    <nav>
+      <a href="index.html" class="nav-btn">Hjem</a>
+      <a href="kalender.html" class="nav-btn">Kalender</a>
+    </nav>
+  </header>
+
+  <main class="todo-container">
+    <section class="todo-box">
+      <h2>Dine oppgaver</h2>
+
+      <div class="input-group">
+        <input type="text" id="task-input" placeholder="Skriv en oppgave..." />
+        <button id="add-task">➕ Legg til</button>
+      </div>
+
+      <ul id="task-list"></ul>
+
+      <button id="clear-all" class="clear-btn">🗑 Slett alt</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 StudyTrack | Laget av Dana Shahein</p>
+  </footer>
+
+  <!-- ====================== -->
+  <!--       JAVASCRIPT       -->
+  <!-- ====================== -->
+
+  <script>
+    const taskInput = document.getElementById("task-input");
+    const addTaskBtn = document.getElementById("add-task");
+    const taskList = document.getElementById("task-list");
+    const clearAllBtn = document.getElementById("clear-all");
+
+    // --- LOCALSTORAGE FUNKSJONER ---
+
+    function loadTasks() {
+      return JSON.parse(localStorage.getItem("tasks")) || [];
+    }
+
+    function saveTasks(tasks) {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    // --- RENDER OPPGAVER ---
+
+    function renderTasks() {
+      const tasks = loadTasks();
+      taskList.innerHTML = "";
+
+      tasks.forEach((task, index) => {
+        const li = document.createElement("li");
+        li.className = task.completed ? "completed" : "";
+
+        li.innerHTML = `
+          <span>${task.text}</span>
+          <div class="actions">
+            <button class="done">✔</button>
+            <button class="delete">❌</button>
+          </div>
+        `;
+
+        // Marker ferdig
+        li.querySelector(".done").addEventListener("click", () => {
+          tasks[index].completed = !tasks[index].completed;
+          saveTasks(tasks);
+          renderTasks();
+        });
+
+        // Slett
+        li.querySelector(".delete").addEventListener("click", () => {
+          tasks.splice(index, 1);
+          saveTasks(tasks);
+          renderTasks();
+        });
+
+        taskList.appendChild(li);
+      });
+    }
+
+    // --- LEGG TIL OPPGAVE ---
+
+    addTaskBtn.addEventListener("click", () => {
+      const text = taskInput.value.trim();
+      if (!text) return;
+
+      let tasks = loadTasks();
+      tasks.push({ text, completed: false });
+      saveTasks(tasks);
+
+      taskInput.value = "";
+      renderTasks();
+    });
+
+    // Enter-tast
+    taskInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") addTaskBtn.click();
+    });
+
+    // --- SLETT ALT ---
+
+    clearAllBtn.addEventListener("click", () => {
+      if (confirm("Vil du slette alle oppgaver?")) {
+        localStorage.removeItem("tasks");
+        renderTasks();
+      }
+    });
+
+    // --- START ---
+    renderTasks();
+  </script>
+
+</body>
+
+</html>

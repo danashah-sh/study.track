@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyTrack | Programmering</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1>Programmering</h1>
+    <p>Hold oversikt over prosjekter, oppgaver og læringsmål i programmering</p>
+  </header>
+
+  <main class="content">
+
+    <!-- Kalender -->
+    <section class="calendar">
+      <h2>🗓️ Viktige datoer</h2>
+      <input type="date" id="calendar-date">
+      <p id="selected-date">Velg en dato for å legge til påminnelse</p>
+    </section>
+
+    <!-- Gjøremål -->
+    <section class="todo">
+      <h2>✅ Oppgaver</h2>
+      <div class="todo-input">
+        <input type="text" id="taskInput" placeholder="Skriv en oppgave...">
+        <button id="addTaskBtn">Legg til</button>
+      </div>
+      <ul id="taskList"></ul>
+    </section>
+
+    <!-- Læringsmål -->
+    <section class="concepts">
+      <h2>💡 Viktige temaer</h2>
+
+      <div class="concept">
+        <button class="concept-title">Variabler og datatyper</button>
+        <div class="concept-content">
+          <p>Variabler brukes til å lagre data. Hver variabel har en type, som for eksempel <b>int</b> (heltall),
+            <b>float</b> (desimaltall) eller <b>string</b> (tekst).</p>
+        </div>
+      </div>
+
+      <div class="concept">
+        <button class="concept-title">Funksjoner og parametere</button>
+        <div class="concept-content">
+          <p>Funksjoner lar deg gjenbruke kode. Du definerer dem med <b>def</b> i Python og sender inn verdier via
+            parametere som gjør koden mer fleksibel.</p>
+        </div>
+      </div>
+
+      <div class="concept">
+        <button class="concept-title">Kontrollstrukturer (if, for, while)</button>
+        <div class="concept-content">
+          <p>Kontrollstrukturer styrer flyten i programmet. <b>if</b> brukes til valg, mens <b>for</b> og <b>while</b>
+            brukes til å gjenta kode flere ganger.</p>
+        </div>
+      </div>
+
+      <div class="concept">
+        <button class="concept-title">Objektorientert programmering</button>
+        <div class="concept-content">
+          <p>OOP handler om å organisere kode i klasser og objekter som speiler virkelige konsepter. Det gir bedre
+            struktur og gjenbruk av kode.</p>
+        </div>
+      </div>
+
+      <div class="concept">
+        <button class="concept-title">Feilhåndtering og debugging</button>
+        <div class="concept-content">
+          <p>Feilhåndtering bruker <b>try/except</b> for å fange opp feil. Debugging hjelper deg å finne og fikse feil i
+            koden med verktøy eller print-setninger.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Ressurser -->
+    <section class="resources">
+      <h2>🌐 Ressurser</h2>
+      <div class="subject-grid">
+        <a href="https://www.w3schools.com/python/" target="_blank" class="subject">🐍 Lær Python</a>
+        <a href="https://www.w3schools.com/html/" target="_blank" class="subject">🌐 HTML & CSS</a>
+        <a href="https://developer.mozilla.org/no/" target="_blank" class="subject">📘 MDN Web Docs</a>
+        <a href="https://github.com/" target="_blank" class="subject">💾 GitHub</a>
+      </div>
+    </section>
+
+    <!-- Notater -->
+    <section class="notes">
+      <h2>📝 Notater</h2>
+      <textarea id="notes" placeholder="Skriv ideer, kodeutkast eller påminnelser her..."></textarea>
+      <button id="saveNotesBtn">💾 Lagre</button>
+    </section>
+
+    <!-- Tilbake -->
+    <a href="it.html" class="back-btn">⬅ Tilbake til IT-linjen</a>
+  </main>
+
+  <footer>
+    <p>© 2025 StudyTrack | Laget av [Ditt navn]</p>
+  </footer>
+
+  <script>
+    // === Kalender ===
+    const calendarInput = document.getElementById("calendar-date");
+    const selectedDateText = document.getElementById("selected-date");
+
+    calendarInput.addEventListener("change", () => {
+      const date = new Date(calendarInput.value);
+      selectedDateText.textContent = `Valgt dato: ${date.toLocaleDateString("no-NO")}`;
+    });
+
+    // === Gjøremål ===
+    const addTaskBtn = document.getElementById("addTaskBtn");
+    const taskInput = document.getElementById("taskInput");
+    const taskList = document.getElementById("taskList");
+
+    addTaskBtn.addEventListener("click", () => {
+      const taskText = taskInput.value.trim();
+      if (taskText === "") return;
+
+      const li = document.createElement("li");
+      li.innerHTML = `<span>${taskText}</span><button class="delete-btn">✖</button>`;
+      li.querySelector(".delete-btn").addEventListener("click", () => li.remove());
+      taskList.appendChild(li);
+      taskInput.value = "";
+    });
+
+    // === Notater (lagres i nettleseren) ===
+    const notes = document.getElementById("notes");
+    const saveBtn = document.getElementById("saveNotesBtn");
+
+    notes.value = localStorage.getItem("programmering-notes") || "";
+
+    saveBtn.addEventListener("click", () => {
+      localStorage.setItem("programmering-notes", notes.value);
+      alert("Notatene dine er lagret!");
+    });
+    // === Utvidbare konsepter (accordion) ===
+    const concepts = document.querySelectorAll(".concept");
+
+    concepts.forEach(concept => {
+      const title = concept.querySelector(".concept-title");
+      title.addEventListener("click", () => {
+        concept.classList.toggle("active");
+      });
+    });
+
+
+  </script>
+</body>
+
+</html>

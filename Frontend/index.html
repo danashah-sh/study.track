@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+  <meta charset="UTF-8" /> <!-- Lager norske bokstaver riktig -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Får siden til å se bra ut på mobil -->
+  <title>StudyTrack | Velg linje</title> <!-- Navn på fanen i nettleseren -->
+  <link rel="stylesheet" href="style.css" /> <!-- Kobler til stilark -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"> <!-- Laster inn fin font -->
+</head>
+
+<body>
+  <!-- Forside / hovedseksjon -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>StudyTrack</h1> <!-- Stor tittel -->
+      <p>Planlegg skolehverdagen din — effektivt og enkelt</p> <!-- Kort forklaring -->
+
+      <!-- Meny / navigasjon -->
+      <nav class="navbar">
+        <ul>
+          <li><a href="index.html">Hjem</a></li> <!-- Link til hjem -->
+          <li><a href="studieforbredene.html">Studieforberedende</a></li> <!-- Link til studieforberedende linjer -->
+          <li><a href="yrkesfag.html">Yrkesfag</a></li> <!-- Link til yrkesfag linjer -->
+          <li><a href="kalender.html">Kalender</a></li> <!-- Link til kalender -->
+          <li><a href="liste.html">Todo-liste</a></li> <!-- Link til gjøremålsliste -->
+        </ul>
+
+        <!-- Knapp for login / register -->
+        <button onclick="document.getElementById('id01').style.display='block'">Login / Register</button>
+
+        <!-- LOGIN / REGISTER MODAL -->
+        <div id="id01" class="modal" style="display:none;">
+          <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+          <!-- Skjema for login og register -->
+          <form class="modal-content animate" onsubmit="login(event)">
+            <div class="imgcontainer">
+              <img src="pfp-removebg.png" alt="Avatar" class="avatar"> <!-- Bilde -->
+            </div>
+
+            <div class="container">
+              <label for="uname"><b>Username</b></label>
+              <input id="login-username" type="text" placeholder="Enter Username" name="uname" required> <!-- Skriv brukernavn -->
+
+              <label for="psw"><b>Password</b></label>
+              <input id="login-password" type="password" placeholder="Enter Password" name="psw" required> <!-- Skriv passord -->
+
+              <button type="submit">Login</button> <!-- Login knapp -->
+              <button type="button" onclick="registerUser()">Register</button> <!-- Register knapp -->
+            </div>
+          </form>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Studieforberedende seksjon -->
+  <div class="section section2">
+    <main>
+      <section>
+        <h2 class="category-title yellow">Studieforberedende</h2>
+        <div class="grid">
+          <a href="kunst.html" class="card yellow"><h3>Kunst, design og arkitektur</h3></a>
+          <a href="#" class="card yellow"><h3>Medier og kommunikasjon</h3></a>
+          <a href="#" class="card yellow"><h3>Musikk, dans og drama</h3></a>
+          <a href="studie.html" class="card yellow"><h3>Studiespesialisering</h3></a>
+          <a href="#" class="card yellow"><h3>Idrettsfag</h3></a>
+          <a href="https://www.vilbli.no/nb/no" class="card yellow"><h3>Mer info</h3></a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Yrkesfag seksjon -->
+  <div class="section section3">
+    <section>
+      <h2 class="category-title green">Yrkesfaglige</h2>
+      <div class="grid">
+        <a href="it.html" class="card green"><h3>Informasjonsteknologi og medieproduksjon</h3></a>
+        <a href="elektro.html" class="card green"><h3>Elektro og datateknologi</h3></a>
+        <a href="#" class="card green"><h3>Restaurant- og matfag</h3></a>
+        <a href="#" class="card green"><h3>Bygg- og anleggsteknikk</h3></a>
+        <a href="#" class="card green"><h3>Frisør, blomster, interiør og design</h3></a>
+        <a href="#" class="card green"><h3>Helse- og oppvekstfag</h3></a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Kontakt seksjon -->
+  <section class="contact-advisor">
+    <h2 class="category-title blue">Kontakt og Skoleavisa</h2>
+    <div class="contact-buttons">
+      <a href="#" class="btn contact-btn">Kontakt rådgiver</a> <!-- Kontakt knapp -->
+      <a href="https://www.skoleavisa.no/" class="btn school-btn">Skoleavisa</a> <!-- Skoleavis knapp -->
+    </div>
+  </section>
+
+  <!-- Modal for kontakt -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span> <!-- Lukk knapp -->
+      <h3>Kontakt vår rådgiver</h3>
+      <form id="contactForm">
+        <label for="name">Navn:</label>
+        <input type="text" id="name" name="name" required> <!-- Skriv navn -->
+
+        <label for="email">E-post:</label>
+        <input type="email" id="email" name="email" required> <!-- Skriv e-post -->
+
+        <label for="message">Melding:</label>
+        <textarea id="message" name="message" rows="4" required></textarea> <!-- Skriv melding -->
+
+        <button type="submit" class="btn submit-btn">Send melding</button> <!-- Send knapp -->
+      </form>
+    </div>
+  </div> 
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 StudyTrack | Laget av Dana Shahein</p>
+  </footer>
+
+  <!-- LOGIN / REGISTER LOGIKK -->
+  <script>
+    const API = "http://localhost:3000"; // Adresse til backend
+
+    // Registrer bruker
+    async function registerUser() {
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+
+      const res = await fetch(`${API}/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        alert("Registrering vellykket. Du kan nå logge inn."); // Velg ok
+      } else {
+        alert(data.error || "Registrering feilet"); // Feil
+      }
+    }
+
+    // Logg inn bruker
+    async function login(event) {
+      event.preventDefault(); // Stopper siden fra å laste på nytt
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+
+      const res = await fetch(`${API}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await res.json();
+      if (data.token) {
+        localStorage.setItem("token", data.token); // Lagre token
+        alert("Logget inn!"); 
+        document.getElementById('id01').style.display = 'none'; // Lukk modal
+      } else {
+        alert(data.error || "Innlogging feilet"); // Feil
+      }
+    }
+
+    // Klikk utenfor modal lukker den
+    window.onclick = function (event) {
+      const modal = document.getElementById('id01');
+      if (event.target == modal) {
+        modal.style.display = "none"; // Lukk modal
+      }
+    };
+  </script>
+
+</body>
+</html>

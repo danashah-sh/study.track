@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+  <meta charset="UTF-8"> <!-- Sørger for at norske bokstaver vises riktig -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Passer siden til mobil og PC -->
+  <title>StudyTrack | IT-linjen</title> <!-- Tittel som vises i nettleserfanen -->
+  <link rel="stylesheet" href="style.css"> <!-- Hoved-CSS -->
+  <link rel="stylesheet" href="it.css"> <!-- Spesifikk CSS for IT-siden -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"> <!-- Laster font -->
+</head>
+
+<body>
+  <!-- NAVBAR / meny -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="index.html">Hjem</a></li>
+      <li><a href="studieforbredene.html">Studieforberedende</a></li>
+      <li><a href="yrkesfag.html">Yrkesfag</a></li>
+      <li><a href="kalender.html">Kalender</a></li>
+      <li><a href="liste.html">Todo-liste</a></li>
+    </ul>
+  </nav>
+
+  <!-- HEADER / overskrift -->
+  <header>
+    <h1>Informasjonsteknologi og medieproduksjon</h1> <!-- Stor tittel -->
+    <p>Planlegg prosjekter, lekser og fag</p> <!-- Kort forklaring -->
+  </header>
+
+  <main class="content">
+    <!-- Kalender-seksjon -->
+    <section class="calendar">
+      <h2>🗓️ Kalender</h2>
+      <input type="date" id="calendar-date"> <!-- Velg dato -->
+      <p id="selected-date">Velg en dato for å se eller legge til planer</p> <!-- Viser valgt dato -->
+    </section>
+
+    <!-- Gjøremål / todo-liste -->
+    <section class="todo">
+      <h2>✅ Gjøremål</h2>
+      <div class="todo-input">
+        <input type="text" id="taskInput" placeholder="Skriv et gjøremål..."> <!-- Skriv ny oppgave -->
+        <button id="addTaskBtn">Legg til</button> <!-- Legg til oppgave -->
+      </div>
+      <ul id="taskList"></ul> <!-- Her vises oppgavene -->
+    </section>
+
+    <!-- Fag-seksjon -->
+    <section class="subjects">
+      <h2>Fag</h2>
+      <div class="grid">
+        <a href="programmering.html" class="card blue"><h3>Programmering</h3></a>
+        <a href="webutvikling.html" class="card cyan"><h3>Webutvikling</h3></a>
+        <a href="drift.html" class="card purple"><h3>Drift og sikkerhet</h3></a>
+        <a href="prosjekt.html" class="card orange"><h3>Prosjekt og dokumentasjon</h3></a>
+        <a href="database.html" class="card teal"><h3>Database</h3></a>
+        <a href="ai.html" class="card pink"><h3>Kunstig intelligens</h3></a>
+      </div>
+    </section>
+
+    <!-- Tilbake-knapp -->
+    <a href="index.html" class="back-btn">⬅ Tilbake til forsiden</a>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 StudyTrack | Laget av Dana Shahein</p>
+  </footer>
+
+  <!-- === JAVASCRIPT === -->
+  <script>
+    // Kalender
+    const calendarInput = document.getElementById("calendar-date"); // Henter dato-input
+    const selectedDateText = document.getElementById("selected-date"); // Henter paragrafen for valgt dato
+
+    // Når datoen endres, vis den
+    calendarInput.addEventListener("change", () => {
+      const date = new Date(calendarInput.value); // Lager dato-objekt
+      selectedDateText.textContent = `Valgt dato: ${date.toLocaleDateString("no-NO")}`; // Viser dato på norsk
+    });
+
+    // Gjøremål med localStorage
+    const addTaskBtn = document.getElementById("addTaskBtn"); // Hent knapp
+    const taskInput = document.getElementById("taskInput"); // Hent input
+    const taskList = document.getElementById("taskList"); // Hent liste
+
+    // Last oppgaver fra localStorage
+    const loadTasks = () => {
+      const tasks = JSON.parse(localStorage.getItem("tasks")) || []; // Hent lagrede oppgaver
+      taskList.innerHTML = ""; // Tøm listen først
+      tasks.forEach(task => addTaskToDOM(task.text, task.completed)); // Legg til hver oppgave
+    };
+
+    // Lagre oppgaver til localStorage
+    const saveTasks = () => {
+      const tasks = [...taskList.children].map(li => ({
+        text: li.querySelector("span").textContent, // Hent tekst
+        completed: li.classList.contains("completed"), // Sjekk om fullført
+      }));
+      localStorage.setItem("tasks", JSON.stringify(tasks)); // Lagre som tekst
+    };
+
+    // Legg oppgave til DOM
+    const addTaskToDOM = (text, completed = false) => {
+      const li = document.createElement("li"); // Lag listeelement
+      const span = document.createElement("span"); 
+      span.textContent = text; // Sett tekst
+
+      if (completed) li.classList.add("completed"); // Marker fullført
+
+      const delBtn = document.createElement("button"); 
+      delBtn.textContent = "✖"; 
+      delBtn.className = "delete-btn"; 
+      delBtn.addEventListener("click", () => {
+        li.remove(); // Fjern oppgave
+        saveTasks(); // Lagre endringer
+      });
+
+      span.addEventListener("click", () => {
+        li.classList.toggle("completed"); // Marker/avmarker fullført
+        saveTasks(); // Lagre endringer
+      });
+
+      li.append(span, delBtn); // Legg tekst og knapp i li
+      taskList.appendChild(li); // Legg til i liste
+    };
+
+    // Når knapp trykkes, legg til ny oppgave
+    addTaskBtn.addEventListener("click", () => {
+      const text = taskInput.value.trim(); // Hent tekst
+      if (text === "") return; // Ikke tom
+      addTaskToDOM(text); // Legg til
+      saveTasks(); // Lagre
+      taskInput.value = ""; // Tøm input
+    });
+
+    loadTasks(); // Last inn oppgaver når siden åpnes
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+:root {
+  --blue: #dcbcaa;
+  --green: #82644e;
+  --purple: #82644e;
+  --pink: #dcbcaa;
+  --bg: #f9fbff;
+  --text: #333;
+}
+
+/* === GLOBALT === */
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(120deg, #ebedf3, #e9f2fb);
+  color: var(--text);
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* === HEADER === */
+header {
+  text-align: center;
+  background: #a3968d;
+  color: white;
+  padding: 3rem 1rem 2rem;
+  border-bottom: 4px solid rgba(60, 52, 52, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* === INNHOLD === */
+.content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+  text-align: center;
+}
+
+/* === INTRO === */
+.intro {
+  margin-bottom: 2rem;
+}
+
+.intro h2 {
+  color: #afacac;
+  font-size: 1.8rem;
+}
+
+.intro p {
+  max-width: 700px;
+  margin: 1rem auto;
+  line-height: 1.6;
+}
+
+/* === PROGRAMKORT === */
+.program-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid rgba(0,0,0,0.05);
+  text-align: left;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+  color: var(--green);
+  margin-bottom: 0.7rem;
+}
+
+.card p {
+  line-height: 1.5;
+}
+
+/* === KNAPP === */
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--green), var(--blue));
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  transform: translateY(-2px);
+}
+
+/* === HVORFOR VELGE === */
+.why {
+  margin-top: 3rem;
+}
+
+.why h2 {
+  color: var(--green);
+  font-size: 1.8rem;
+}
+
+.why ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem auto;
+  max-width: 600px;
+  text-align: left;
+}
+
+.why li {
+  background: var(--bg);
+  border-left: 4px solid var(--green);
+  padding: 0.8rem 1rem;
+  margin: 0.5rem 0;
+  border-radius: 10px;
+}
+
+/* === TILBAKEKNAPP === */
+.back-btn {
+  display: block;
+  margin: 3rem auto;
+  text-align: center;
+  width: fit-content;
+  background: linear-gradient(135deg, var(--green), var(--blue));
+  color: white;
+  padding: 0.8rem 1.6rem;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.back-btn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+}
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(90deg, var(--green), var(--blue));
+  color: white;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}

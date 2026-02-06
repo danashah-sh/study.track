@@ -1,0 +1,171 @@
+/* === FARGER / VARIABLER === */
+:root {
+  --blue: #81d4fa;   /* Lys blå */
+  --purple: #b39ddb; /* Lys lilla */
+  --pink: #f48fb1;   /* Lys rosa */
+  --bg: #f9fbff;     /* Lys bakgrunn */
+  --text: #333;      /* Mørk tekst */
+}
+
+/* === BODY / HELE SIDEN === */
+body {
+  font-family: "Poppins", sans-serif; /* Font */
+  background: linear-gradient(120deg, #f9fbff, #eef5ff); /* Gradient bakgrunn */
+  color: var(--text); /* Tekstfarge */
+  margin: 0; 
+  min-height: 100vh; /* Full høyde på skjerm */
+  display: flex; 
+  flex-direction: column; /* Header -> content -> footer */
+}
+
+/* === HEADER === */
+header {
+  text-align: center; 
+  background: #c2b7b1; /* Brunlig bakgrunn */
+  color: white; 
+  padding: 2.5rem 1rem; 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Liten skygge */
+}
+
+header h1 {
+  font-size: 2rem; 
+  margin-bottom: 0.5rem; 
+}
+
+header nav {
+  margin-top: 1rem; 
+}
+
+/* === NAV-BUTTONS / MENYKNAPPER === */
+.nav-btn {
+  text-decoration: none; /* Ingen understrek */
+  background: white; 
+  color: #aca29c; 
+  padding: 0.5rem 1rem; 
+  border-radius: 8px; 
+  font-weight: 600; 
+  margin: 0 0.3rem; 
+  transition: all 0.3s ease; /* Myk overgang */
+}
+
+.nav-btn:hover {
+  background: #aca29c; /* Farge når mus over */
+  color: white; 
+}
+
+/* === KALENDER-LAYOUT === */
+.calendar-container {
+  display: grid; 
+  grid-template-columns: 2fr 1fr; /* Kalender + events */
+  gap: 2rem; 
+  padding: 2rem; 
+  max-width: 1100px; 
+  margin: auto; 
+  flex-grow: 1; /* Tar opp tilgjengelig plass */
+}
+
+/* === KALENDER === */
+.calendar {
+  background: white; 
+  border-radius: 20px; 
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+  padding: 1.5rem; 
+}
+
+/* Måned tittel og navigasjon */
+.month {
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  margin-bottom: 1.2rem; 
+}
+
+.month h2 {
+  font-size: 1.5rem; 
+  color: #aca29c; 
+}
+
+.nav {
+  background: #aca29c; 
+  border: none; 
+  color: white; 
+  padding: 0.5rem 0.8rem; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  font-size: 1rem; 
+}
+
+/* Uker og dager */
+.weekdays,
+.days {
+  display: grid; 
+  grid-template-columns: repeat(7, 1fr); /* 7 kolonner for dagene */
+  text-align: center; 
+}
+
+.weekdays div {
+  font-weight: 600; 
+  color: #aca29c; 
+  padding-bottom: 0.5rem; 
+}
+
+.day, .empty {
+  padding: 0.8rem 0; 
+  margin: 3px; 
+  border-radius: 10px; 
+}
+
+.day {
+  background: #ffffff; 
+  cursor: pointer; 
+  transition: 0.3s; 
+  box-shadow: 0 0 4px rgba(0,0,0,0.05); 
+}
+
+.day:hover {
+  background: #aca29c; 
+  color: white; 
+}
+
+.today {
+  background: #aca29c; 
+  color: white; 
+  font-weight: bold; 
+}
+
+/* === EVENTS-SEKSJON === */
+.events {
+  background: white; 
+  border-radius: 20px; 
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+  padding: 1.5rem; 
+}
+
+.events h3 {
+  color: #00000099; 
+  margin-bottom: 1rem; 
+  text-align: center; 
+}
+
+.events ul {
+  list-style: none; 
+  padding: 0; 
+  text-align: left; 
+}
+
+.events li {
+  background: var(--bg); 
+  border-left: 4px solid #aca29c; 
+  margin: 0.5rem 0; 
+  padding: 0.6rem; 
+  border-radius: 8px; 
+}
+
+/* === FOOTER === */
+footer {
+  text-align: center; 
+  padding: 1.2rem; 
+  background: #aca29c; 
+  color: white; 
+  font-weight: 500; 
+}

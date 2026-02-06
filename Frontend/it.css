@@ -1,0 +1,135 @@
+/* === MYK IT-STIL === */
+body {
+  font-family: "Poppins", sans-serif; /* Bruker Poppins-font */
+  margin: 0; /* Fjerner standard marg */
+  background: var(--light-bg); /* Lys bakgrunnsfarge */
+  color: var(--text-dark); /* Mørk tekstfarge */
+  transition: background 0.5s ease, color 0.5s ease; /* Myk overgang når farger endres */
+}
+
+/* === NAVBAR === */
+.navbar {
+  position: sticky; /* Holder navbar på toppen når man scroller */
+  top: 0; 
+  background: linear-gradient(135deg, #929e8a, #e7ebee); /* Gradient bakgrunn */
+  padding: 0; 
+  margin: 0; 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Liten skygge under navbar */
+  z-index: 100; /* Sørger for at navbar ligger over annet innhold */
+}
+
+.navbar ul {
+  list-style: none; /* Fjerner punkter */
+  display: flex; /* Plasserer lenker horisontalt */
+  justify-content: center; /* Sentrerer lenkene */
+  gap: 2rem; /* Mellomrom mellom lenkene */
+  padding: 1rem 0; 
+  margin: 0; 
+  flex-wrap: wrap; /* Bryter til ny linje på små skjermer */
+}
+
+.navbar a {
+  text-decoration: none; /* Fjerner understrek */
+  color: white; /* Hvit tekst */
+  font-weight: 600; /* Litt tykkere tekst */
+  transition: color 0.3s; /* Myk overgang når fargen endres */
+  font-size: 1rem; 
+}
+
+.navbar a:hover {
+  color: #ffd700; /* Gullfarge når musen hovrer over */
+}
+
+/* === HEADER === */
+header {
+  text-align: center; /* Sentrerer teksten */
+  padding: 2rem 1rem; 
+  background: linear-gradient(135deg, #929e8a, #e7ebee); 
+  color: white; 
+  border-bottom: 4px solid #ffffff30; /* Tynn linje under header */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* Liten skygge */
+}
+
+header h1 {
+  font-size: 2.2rem; 
+  margin: 0.5rem 0 0 0; 
+  font-weight: 600; 
+  letter-spacing: 0.5px; /* Litt mellomrom mellom bokstaver */
+}
+
+header p {
+  font-size: 1rem; 
+  opacity: 0.95; /* Litt gjennomsiktig */
+  margin: 0.5rem 0 0 0; 
+}
+
+/* Midtstilt layout for innholdet */
+.content {
+  max-width: 900px; /* Maks bredde */
+  margin: 0 auto; /* Sentrerer horisontalt */
+  text-align: center; 
+  padding: 2.5rem 1rem; 
+}
+
+/* GRID for kortene */
+.grid {
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Fleksible kolonner */
+  gap: 1.5rem; /* Mellomrom mellom kortene */
+  margin-top: 3rem; 
+}
+
+/* === FAGKORT === */
+.grid a {
+  background: #d9dbce !important; /* Lys bakgrunn */
+  border-color: #929e8a !important; /* Kantfarge */
+  color: #0f2a2a !important; /* Mørk tekst */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); /* Liten skygge */
+}
+
+.grid a:hover {
+  transform: translateY(-4px); /* Løft kortet litt når musen er over */
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12); /* Litt større skygge */
+  filter: brightness(0.98); /* Litt mørkere farge */
+}
+
+/* Sikrer at alle kort har samme farge og kant */
+.grid a:nth-child(1),
+.grid a:nth-child(2),
+.grid a:nth-child(3),
+.grid a:nth-child(4),
+.grid a:nth-child(5),
+.grid a:nth-child(6) {
+  border: 2px solid #929e8a; 
+  background: #d9dbce; 
+  color: #505c49; 
+}
+
+/* Tekststil i kortene */
+.grid a span,
+.grid a h3 {
+  color: #0f2a2a; 
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6); /* Liten lys kant rundt tekst */
+}
+
+/* === TILBAKEKNAPP === */
+.back-btn {
+  display: block; 
+  margin: 3rem auto; /* Sentrerer knappen horisontalt */
+  text-align: center; 
+  background: linear-gradient(135deg, var(--pink), var(--purple)); /* Gradient bakgrunn */
+  color: #717171a1; 
+  padding: 0.8rem 1.6rem; 
+  border-radius: 12px; /* Runde hjørner */
+  text-decoration: none; 
+  font-weight: 600; 
+  width: fit-content; /* Knappen blir så bred som teksten */
+  transition: all 0.3s ease; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.back-btn:hover {
+  transform: translateY(-3px); /* Løft knappen litt */
+  background: linear-gradient(135deg, var(--blue), var(--purple)); /* Endre gradient */
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15); /* Større skygge */
+}

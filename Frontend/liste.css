@@ -1,0 +1,187 @@
+:root {
+  --blue: #A4C8D5;      /* pastel blå */
+  --purple: #E9CCC4;    /* dusty rosa */
+  --pink: #FAE8E8;      /* soft rosa */
+  --green: #D4C8B6;     /* pastel sage/beige */
+  --bg: #EBF6FA;        /* veldig lys pastel blå */
+  --text: #555;         /* tydelig men myk tekst */
+}
+
+/* BODY */
+body {
+  font-family: "Poppins", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  background: #dfd5d3 ;   /* pastel grey */
+  color: #ffffff99;
+  padding: 2.5rem 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+header nav {
+  margin-top: 1rem;
+}
+
+.nav-btn {
+  text-decoration: none;
+  background: white;
+  color: var(--purple);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  margin: 0 0.3rem;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background: var(--pink);
+  color: rgb(0, 0, 0);
+}
+
+/* TODO-CONTAINER */
+.todo-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+}
+
+/* TODO-BOX */
+.todo-box {
+  background: #FFFFFF; /* ren hvit for kontrast */
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.todo-box h2 {
+  color: var(--purple);
+  margin-bottom: 1.5rem;
+}
+
+/* INPUT */
+.input-group {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+#task-input {
+  flex: 1;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 2px solid var(--blue);
+  font-size: 1rem;
+  outline: none;
+  transition: 0.2s;
+  background: #FFFFFF;
+  color: var(--text);
+}
+
+#task-input:focus {
+  border-color: var(--purple);
+}
+
+/* ADD-BUTTON */
+#add-task {
+  background: var(--purple);
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#add-task:hover {
+  background: #d8b2ac;
+}
+
+/* TASK LIST */
+#task-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 1.5rem;
+  text-align: left;
+}
+
+#task-list li {
+  background: #F6F3EE;
+  border-left: 6px solid var(--purple);
+  margin-bottom: 0.7rem;
+  padding: 0.8rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s;
+  color: var(--text);
+}
+
+#task-list li.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+  border-left-color: var(--green);
+}
+
+/* ACTION ICONS */
+.actions button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-left: 5px;
+}
+
+.actions .done {
+  color: var(--green);
+}
+
+.actions .delete {
+  color: var(--purple);
+}
+
+/* CLEAR BUTTON */
+.clear-btn {
+  background: var(--purple);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.clear-btn:hover {
+  background: #d8b2ac;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 1.2rem;
+  background: #dfd5d3;
+  color: #9999;
+  font-weight: 500;
+}

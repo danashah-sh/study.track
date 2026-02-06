@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyTrack | Kunst, design og arkitektur</title>
+  <link rel="stylesheet" href="kunst.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1>Kunst, design og arkitektur</h1>
+    <p>Planlegg prosjekter, fag og kreative idéer</p>
+  </header>
+
+
+  <main class="content">
+    <!-- Kalender -->
+    <section class="calendar">
+      <h2>Kalender</h2>
+      <input type="date" id="calendar-date">
+      <p id="selected-date">Velg en dato for å se eller legge til planer</p>
+    </section>
+
+    <!-- Gjøremål -->
+    <section class="todo">
+      <h2>✅ Gjøremål</h2>
+      <div class="todo-input">
+        <input type="text" id="taskInput" placeholder="Skriv et gjøremål...">
+        <button id="addTaskBtn">Legg til</button>
+      </div>
+      <ul id="taskList"></ul>
+    </section>
+
+    <!-- Fag -->
+    <section class="subjects">
+      <h2> Fag</h2>
+      <div class="subject-grid">
+        <a href="#">Visuell kunst</a>
+        <a href="#">Design og arkitektur</a>
+        <a href="#">Kunst- og kulturforståelse</a>
+        <a href="#">Prosjektarbeid</a>
+      </div>
+    </section>
+
+    <!-- Midtstilt tilbake-knapp -->
+    <div class="center-btn">
+      <a href="index.html" class="back-btn">⬅ Tilbake til forsiden</a>
+    </div>
+  </main>
+
+  
+
+  <script>
+  
+    // Kalender
+    const calendarInput = document.getElementById("calendar-date");
+    const selectedDateText = document.getElementById("selected-date");
+
+    calendarInput.addEventListener("change", () => {
+      const date = new Date(calendarInput.value);
+      selectedDateText.textContent = `Valgt dato: ${date.toLocaleDateString("no-NO")}`;
+    });
+
+    // Gjøremål (lagring)
+    const addTaskBtn = document.getElementById("addTaskBtn");
+    const taskInput = document.getElementById("taskInput");
+    const taskList = document.getElementById("taskList");
+    const STORAGE_KEY = "tasks_kunst";
+
+    const loadTasks = () => {
+      const tasks = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      taskList.innerHTML = "";
+      tasks.forEach(task => addTaskToDOM(task.text, task.completed));
+    };
+
+    const saveTasks = () => {
+      const tasks = [...taskList.children].map(li => ({
+        text: li.querySelector("span").textContent,
+        completed: li.classList.contains("completed"),
+      }));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+    };
+
+    const addTaskToDOM = (text, completed = false) => {
+      const li = document.createElement("li");
+      const span = document.createElement("span");
+      span.textContent = text;
+
+      if (completed) li.classList.add("completed");
+
+      const delBtn = document.createElement("button");
+      delBtn.textContent = "✖";
+      delBtn.className = "delete-btn";
+      delBtn.addEventListener("click", () => {
+        li.remove();
+        saveTasks();
+      });
+
+      span.addEventListener("click", () => {
+        li.classList.toggle("completed");
+        saveTasks();
+      });
+
+      li.append(span, delBtn);
+      taskList.appendChild(li);
+    };
+
+    addTaskBtn.addEventListener("click", () => {
+      const text = taskInput.value.trim();
+      if (text === "") return;
+      addTaskToDOM(text);
+      saveTasks();
+      taskInput.value = "";
+    });
+
+    loadTasks();
+  </script>
+
+<footer>
+    <p>© 2025 StudyTrack | Laget av Dana Shahein</p>
+  </footer>
+
+</html>

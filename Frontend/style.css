@@ -1,0 +1,716 @@
+/* === FARGER OG VARIABLER === */
+:root {
+  --blue: #e7ebee; /* updated from #c5d4d2 to requested e7ebee */
+  --green: #9e9e92;
+  --yellow: #eae4dc;
+  --light-bg: #f8fafc;
+  --dark-bg: #121212;
+  --text-dark: #333;
+  --text-light: #f8f8f8;
+}
+
+/* === GLOBALT === */
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  background: var(--light-bg);
+  color: var(--text-dark);
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* === HEADER === */
+header,
+.site-header {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: linear-gradient(135deg, var(--green), var(--blue));
+  color: white;
+  border-bottom: 4px solid #ffffff30;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 2.6rem;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.header-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* === NAVBAR === */
+.navbar {
+  margin-top: 1rem;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.navbar a:hover {
+  color: #ffd700;
+}
+
+/* === SEKSJONSTITLER === */
+.category-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-top: 3rem;
+  font-weight: 600;
+}
+
+.category-title.yellow {
+  color: #4a3f00;
+}
+
+.category-title.green {
+  color: #505c49;
+}
+
+/* === GRID OG KORT === */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.card {
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  font-weight: 500;
+  background: white;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeInUp 0.8s ease-out forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card.yellow {
+  border: 2px solid #beb890;
+  background: #e4dac2;
+  color: #4a3f00;
+}
+
+.card.green {
+  border: 2px solid #929e8a;
+  background: #d9dbce;
+  color: #505c49;
+}
+
+.card:hover {
+  transform: translateY(-6px) rotate(-1deg);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === PARALLAX-SEKSJON === */
+.parallax {
+  background-image: url("1.jpg");
+  min-height: 500px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: 600;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+/* === KALENDER === */
+.calendar {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.calendar input[type="date"] {
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  border: 2px solid var(--blue);
+  font-size: 1rem;
+}
+
+/* === TODO-LISTE === */
+.todo {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.todo-input {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.todo-input input {
+  padding: 0.7rem;
+  border-radius: 10px;
+  border: 2px solid var(--green);
+  width: 230px;
+}
+
+.todo-input button {
+  background: linear-gradient(135deg, var(--green), var(--blue));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.7rem 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.todo-input button:hover {
+  background: linear-gradient(135deg, var(--blue), var(--green));
+  transform: translateY(-2px);
+}
+
+#taskList {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+#taskList li {
+  background: #e9f7ef;
+  border-left: 5px solid var(--green);
+  color: var(--text-dark);
+  margin: 0.5rem auto;
+  max-width: 350px;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+#taskList li:hover {
+  transform: scale(1.02);
+  background: #d0f0d0;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #d32f2f;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* === ACCORDION === */
+.concept {
+  background: #f1f8e9;
+  border-radius: 10px;
+  margin: 0.5rem 0;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s;
+}
+
+.concept:hover {
+  transform: translateY(-2px);
+}
+
+.concept-title {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 1rem;
+  cursor: pointer;
+  color: var(--text-dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.concept-title::after {
+  content: "▼";
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.concept.active .concept-title::after {
+  transform: rotate(-180deg);
+}
+
+.concept-content {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1rem;
+  background: #ffffffc8;
+  color: var(--text-dark);
+  line-height: 1.6;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+
+.concept.active .concept-content {
+  max-height: 300px;
+  padding: 1rem;
+}
+
+/* === TEMA-KNAPP === */
+#theme-toggle {
+  background: linear-gradient(135deg, #1e88e5, #42a5f5);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.8rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 1.5rem;
+}
+
+#theme-toggle:hover {
+  background: linear-gradient(135deg, #1565c0, #1e88e5);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 3rem;
+  background: var(--blue);
+  color: white;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* === TILBAKEKNAPP === */
+.back-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--blue);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: #62b0f1;
+}
+
+/* === RESPONSIVT === */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  .todo-input {
+    flex-direction: column;
+  }
+
+  .todo-input button {
+    width: 100%;
+  }
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+.parallax {
+  background: url("4121618-uhd_3840_2160_25fps.mp4") center/cover no-repeat;
+  height: 100vh; /* Akkurat som winter.jpg */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1000;
+}
+
+/* === HERO-SEKSJON === */
+.hero {
+  height: 100vh;
+  width: 100%;
+  background: url("1.jpg") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* mørk overlay for profesjonell look */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* innholdet */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  animation: fadeIn 1.4s ease;
+}
+
+.hero-content h1 {
+  font-size: 3.2rem;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 30px;
+}
+
+/* navbar i hero */
+.hero .navbar ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  justify-content: center;
+  padding: 0;
+}
+
+.hero .navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: opacity 0.3s;
+}
+
+.hero .navbar a:hover {
+  opacity: 0.7;
+}
+
+/* fade-in animasjon */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.category-title.blue {
+  color: #9999;
+}
+
+.contact-advisor {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.contact-buttons {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  color: white;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-block;
+}
+
+.contact-btn {
+  background: #929e8a; /* solid requested color */
+}
+
+.school-btn {
+  background: linear-gradient(135deg, #92a9a7, #ccdcdb);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal styling */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #a3aaa1; /* solid requested color */
+  color: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22); /* slightly stronger shadow for contrast */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  opacity: 0.95;
+}
+
+/* Form inside modal */
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-content input,
+.modal-content textarea {
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #b5c9c7;
+  font-size: 1rem;
+  width: 100%;
+  background: #f7fafc;
+  color: #222;
+}
+
+.submit-btn {
+  background: #9fafa6;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, #7a8c6e, #b2c2bc);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.18);
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #9e9e92; /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box (override older dark style) */
+.modal-content {
+  background-color: #929e8a; /* solid requested color */
+  color: #ffffff;
+  margin: 5px auto;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  width: 80%;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+}
+
+/* The Close Button */
+.close {
+  /* Position it in the top right corner outside of the modal */
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+/* Close button on hover */
+.close:hover,
+.close:focus {
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s;
+}
+
+@-webkit-keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes animatezoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Avatar image styling */
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+/* Login button styling */
+.hero .navbar button {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin-top: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+
+.hero .navbar button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  opacity: 1;
+}
+
+.school-link {
+  background: #cfe8db;
+
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  color: #000000; /* darker text for contrast on light background */
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+}
+
+
+
+
+
+
+
+
+/* === RESSURS-KNAPPER === */
+.subject-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.subject {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  min-width: 150px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background: linear-gradient(135deg, #92c5f0, #6aa6e0); /* default blå gradient */
+}
+
+/* Hver knapp kan få sin egen farge om ønskelig */
+.subject:nth-child(1) { background: linear-gradient(135deg, #9ad1a6, #70b97d); } /* Lær Python – grønn */
+.subject:nth-child(2) { background: linear-gradient(135deg, #f7c6a6, #f28c6e); } /* HTML & CSS – oransje */
+.subject:nth-child(3) { background: linear-gradient(135deg, #c6a6f7, #8c6ef2); } /* MDN – lilla */
+.subject:nth-child(4) { background: linear-gradient(135deg, #f78ca6, #f26e8c); } /* GitHub – rosa */
+
+.subject:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+}

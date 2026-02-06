@@ -1,0 +1,78 @@
+/* === ELEKTRO & DATATEKNOLOGI STIL === */
+
+body {
+  background: linear-gradient(120deg, #f8fbff, #eaf7ff);
+  color: #0f172a;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2.5rem 1rem;
+}
+
+/* === GRID === */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+/* === FAGKORT === */
+.grid a {
+  display: block;
+  text-decoration: none;
+  color: #0d1b2a;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grid a:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+/* === FARGER (elektro vibe) === */
+.grid a:nth-child(1) { background: linear-gradient(135deg, #fffbe6, #fff4c4); border-color: #ffe77a; }  /* Elenergisystemer – gul energi */
+.grid a:nth-child(2) { background: linear-gradient(135deg, #c7f0ff, #b5e3ff); border-color: #7dd3fc; }  /* Automatisering – lys blå */
+.grid a:nth-child(3) { background: linear-gradient(135deg, #e6e6e6, #f0f0f0); border-color: #cfcfcf; }  /* Elektronikk – sølv/metall */
+.grid a:nth-child(4) { background: linear-gradient(135deg, #ffe6c7, #fff0db); border-color: #ffc87a; }  /* Data/nettverk – oransje */
+.grid a:nth-child(5) { background: linear-gradient(135deg, #c7fff7, #d8fff9); border-color: #9ff9eb; }  /* Prosjekt – turkis */
+
+/* === TEKST === */
+.grid a h3 {
+  color: #0a2239;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* === TILBAKEKNAPP === */
+.back-btn {
+  display: block;
+  margin: 3rem auto;
+  text-align: center;
+  background: linear-gradient(135deg, #ffe177, #ffd740);
+  color: #000;
+  padding: 0.8rem 1.6rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  width: fit-content;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.back-btn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #fff18a, #ffe55c);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
